@@ -2,6 +2,7 @@ package com.entelgy.controller;
 
 import com.entelgy.models.DataContainer;
 import com.entelgy.service.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +15,9 @@ public class Rest {
     @Value("${test.url}")
     private String url;
 
-    private final Service service;
+    private Service service;
 
+    @Autowired
     public Rest(Service service) {
         this.service = service;
     }
