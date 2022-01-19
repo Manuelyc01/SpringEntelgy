@@ -1,28 +1,30 @@
 package com.entelgy.controller;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.HttpClientBuilder;
+import com.entelgy.EntelgyApplication;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+@SpringBootTest(classes = EntelgyApplication.class)
+@AutoConfigureMockMvc
 class RestTest {
 
+    @Autowired
+    private MockMvc mockMvc;
+
     @Test
-    public void statu() throws IOException {//Estatus de Conexión 200 OK
+    void listar() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/listar")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
 
-        HttpUriRequest request = new HttpPost( "http://localhost:8081/listar");
-
-        HttpResponse httpResponse = HttpClientBuilder.create().build().execute( request );
-
-        assertThat(httpResponse.getStatusLine().getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
-
-
 }
