@@ -20,11 +20,10 @@ class RestTest {
     private MockMvc mockMvc;
 
     @Test
-    void listar() throws Exception {
+    void listar() throws Exception {//Estatus de Conexión 200 OK
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/listar")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-
     }
 }
